@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    container_name: MangList_API
+    ports:
+      - "3000:3000"
+    build: .
+    restart: unless-stopped
+    links:
+      - mymongodb
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mymongodb:
+    container_name: mymongodatabase
+    image: mongo
+    ports:
+      - "27018:27017"
+    restart: unless-stopped
+    volumes:
+      - ../data:/data/db
